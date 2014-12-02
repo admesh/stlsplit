@@ -1,0 +1,6 @@
+*.stl
+*.STL
+stlsplit
+a.out
+*~
+.o
