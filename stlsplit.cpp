@@ -3,6 +3,7 @@
 #include <set>
 #include <queue>
 #include <deque>
+#include <sstream>
 #include <admesh/stl.h>
 
 int main(int argc, char **argv) {
@@ -84,6 +85,16 @@ int main(int argc, char **argv) {
       stl_facet_stats(mesh, stl_in.facet_start[*facet], first);
       first = 0;
     }
+  }
+  
+  unsigned int namecounter = 0;
+  
+  for (stl_file* m : meshes) {
+    namecounter++;
+    std::stringstream ss;
+    ss << "model" << namecounter << ".stl";
+    stl_write_binary(m, ss.str().c_str(), "stlsplit");
+    stl_exit_on_error(m);
   }
 
   return 0;
