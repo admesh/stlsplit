@@ -15,7 +15,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <iostream>
-#include <vector>
 #include <set>
 #include <queue>
 #include <deque>
@@ -32,11 +31,10 @@ int main(int argc, char **argv) {
   stl_exit_on_error(&stl_in);
   stl_repair(&stl_in, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0); // Default repair
 
-  std::vector<stl_file*> meshes;
   std::set<int> seen_facets;
   
   // loop while we have remaining facets
-  while (1) {
+  for (unsigned int namecounter = 1; ; namecounter++) {
     // get the first facet
     std::queue<int> facet_queue;
     std::deque<int> facets;
@@ -47,7 +45,7 @@ int main(int argc, char **argv) {
         break;
       }
     }
-    if (facet_queue.empty()) break;
+    if (facet_queue.empty()) return 0;
     
     while (!facet_queue.empty()) {
       int facet_idx = facet_queue.front();
@@ -61,7 +59,6 @@ int main(int argc, char **argv) {
     }
     
     stl_file* mesh = new stl_file;
-    meshes.push_back(mesh);
     mesh->stats.type = inmemory;
     mesh->stats.number_of_facets = facets.size();
     mesh->stats.original_num_facets = mesh->stats.number_of_facets;
@@ -74,18 +71,11 @@ int main(int argc, char **argv) {
       stl_facet_stats(mesh, stl_in.facet_start[*facet], first);
       first = 0;
     }
-  }
-  
-  unsigned int namecounter = 0;
-  
-  for (stl_file* m : meshes) {
-    namecounter++;
+    
     std::stringstream ss;
     ss << argv[1] << ".part" << namecounter << ".stl";
-    stl_write_binary(m, ss.str().c_str(), "stlsplit");
-    stl_exit_on_error(m);
+    stl_write_binary(mesh, ss.str().c_str(), "stlsplit");
+    stl_exit_on_error(mesh);
   }
-
-  return 0;
 }
 

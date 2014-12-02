@@ -11,7 +11,7 @@ Compiling
 
 You'll need the [ADMesh libraray](https://github.com/admesh/admesh) and g++:
 
-    g++ --std=c++11 -Wall stlsplit.cpp -ladmesh -o stlsplit
+    g++ -Wall stlsplit.cpp -ladmesh -o stlsplit
 
 To install stlsplit, put the compiled binary into your `$PATH`.
 
