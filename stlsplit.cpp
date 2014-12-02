@@ -11,37 +11,7 @@ int main(int argc, char **argv) {
   char *filename = (char *)"model.stl";
   stl_open(&stl_in, filename);
   stl_exit_on_error(&stl_in);
-
-  int      fixall_flag = 1;
-  int      exact_flag = 0;
-  int      tolerance_flag = 0;
-  float    tolerance = 0;
-  int      increment_flag = 0;
-  float    increment = 0;
-  int      nearby_flag = 0;
-  int      iterations = 2;
-  int      remove_unconnected_flag = 0;
-  int      fill_holes_flag = 0;
-  int      normal_directions_flag = 0;
-  int      normal_values_flag = 0;
-  int      reverse_all_flag = 0;
-  int      verbose_flag = 0;
-
-  stl_repair(&stl_in,
-             fixall_flag,
-             exact_flag,
-             tolerance_flag,
-             tolerance,
-             increment_flag,
-             increment,
-             nearby_flag,
-             iterations,
-             remove_unconnected_flag,
-             fill_holes_flag,
-             normal_directions_flag,
-             normal_values_flag,
-             reverse_all_flag,
-             verbose_flag);
+  stl_repair(&stl_in, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0); // Default repair
 
   std::vector<stl_file*> meshes;
   std::set<int> seen_facets;
