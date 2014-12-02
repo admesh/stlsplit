@@ -92,7 +92,7 @@ int main(int argc, char **argv) {
   for (stl_file* m : meshes) {
     namecounter++;
     std::stringstream ss;
-    ss << "model" << namecounter << ".stl";
+    ss << filename << ".part" << namecounter << ".stl";
     stl_write_binary(m, ss.str().c_str(), "stlsplit");
     stl_exit_on_error(m);
   }
