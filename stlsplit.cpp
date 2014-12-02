@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
   stl_file stl_in;
   if (argc != 2) {
     std::cerr << "Usage: " << argv[0] << " file.stl" << std::endl;
-    exit(1);
+    return 1;
   }
   stl_open(&stl_in, argv[1]);
   stl_exit_on_error(&stl_in);
