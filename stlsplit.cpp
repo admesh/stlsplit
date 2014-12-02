@@ -58,24 +58,24 @@ int main(int argc, char **argv) {
       seen_facets.insert(facet_idx);
     }
     
-    stl_file* mesh = new stl_file;
-    mesh->stats.type = inmemory;
-    mesh->stats.number_of_facets = facets.size();
-    mesh->stats.original_num_facets = mesh->stats.number_of_facets;
-    stl_clear_error(mesh);
-    stl_allocate(mesh);
+    stl_file stl_out;
+    stl_out.stats.type = inmemory;
+    stl_out.stats.number_of_facets = facets.size();
+    stl_out.stats.original_num_facets = stl_out.stats.number_of_facets;
+    stl_clear_error(&stl_out);
+    stl_allocate(&stl_out);
     
     int first = 1;
     for (std::deque<int>::const_iterator facet = facets.begin(); facet != facets.end(); facet++) {
-      mesh->facet_start[facet - facets.begin()] = stl_in.facet_start[*facet];
-      stl_facet_stats(mesh, stl_in.facet_start[*facet], first);
+      stl_out.facet_start[facet - facets.begin()] = stl_in.facet_start[*facet];
+      stl_facet_stats(&stl_out, stl_in.facet_start[*facet], first);
       first = 0;
     }
     
     std::stringstream ss;
     ss << argv[1] << ".part" << namecounter << ".stl";
-    stl_write_binary(mesh, ss.str().c_str(), "stlsplit");
-    stl_exit_on_error(mesh);
+    stl_write_binary(&stl_out, ss.str().c_str(), "stlsplit");
+    stl_exit_on_error(&stl_out);
   }
 }
 
