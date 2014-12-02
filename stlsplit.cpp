@@ -8,8 +8,11 @@
 
 int main(int argc, char **argv) {
   stl_file stl_in;
-  char *filename = (char *)"model.stl";
-  stl_open(&stl_in, filename);
+  if (argc != 2) {
+    std::cerr << "Usage: " << argv[0] << " file.stl" << std::endl;
+    exit(1);
+  }
+  stl_open(&stl_in, argv[1]);
   stl_exit_on_error(&stl_in);
   stl_repair(&stl_in, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0); // Default repair
 
@@ -62,7 +65,7 @@ int main(int argc, char **argv) {
   for (stl_file* m : meshes) {
     namecounter++;
     std::stringstream ss;
-    ss << filename << ".part" << namecounter << ".stl";
+    ss << argv[1] << ".part" << namecounter << ".stl";
     stl_write_binary(m, ss.str().c_str(), "stlsplit");
     stl_exit_on_error(m);
   }
