@@ -6,8 +6,8 @@ This tool receives one STL file and split it to several files - one shell a file
 The code originated in [Slic3r](https://github.com/alexrj/Slic3r) and the author of the splitting code is [Alessandro Ranellucci](https://github.com/alexrj).
 It's licensed under the _GNU Affero General Public License, version 3_.
 
-Compiling
----------
+Building
+--------
 
 You'll need the [ADMesh libraray](https://github.com/admesh/admesh) and g++:
 
