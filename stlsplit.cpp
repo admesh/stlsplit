@@ -29,7 +29,8 @@ int main(int argc, char **argv) {
   stl_file stl_in;
   stl_open(&stl_in, argv[1]);
   stl_exit_on_error(&stl_in);
-  stl_repair(&stl_in, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0); // Default repair
+  // We need neighbors and filled holes
+  stl_repair(&stl_in, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 /* fill_holes_flag */, 0, 0, 0, 0);
 
   std::set<int> seen_facets;
   
