@@ -45,7 +45,10 @@ int main(int argc, char **argv) {
         break;
       }
     }
-    if (facet_queue.empty()) return 0;
+    if (facet_queue.empty()) {
+      stl_close(&stl_in);
+      return 0;
+    }
     
     while (!facet_queue.empty()) {
       int facet_idx = facet_queue.front();
@@ -62,6 +65,9 @@ int main(int argc, char **argv) {
     stl_out.stats.type = inmemory;
     stl_out.stats.number_of_facets = facets.size();
     stl_out.stats.original_num_facets = stl_out.stats.number_of_facets;
+    stl_out.v_indices = NULL;
+    stl_out.v_shared = NULL;
+    stl_out.neighbors_start = NULL;
     stl_clear_error(&stl_out);
     stl_allocate(&stl_out);
     
@@ -76,6 +82,7 @@ int main(int argc, char **argv) {
     ss << argv[1] << ".part" << namecounter << ".stl";
     stl_write_binary(&stl_out, ss.str().c_str(), "stlsplit");
     stl_exit_on_error(&stl_out);
+    stl_close(&stl_out);
   }
 }
 
