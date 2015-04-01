@@ -20,6 +20,12 @@ To install stlsplit, put the compiled binary and the shared library into your `$
     sudo cp build/stlsplit /usr/local/bin
     sudo cp build/libstlsplit.so.1 /usr/local/lib # or lib64
 
+If you intend to build something with stlsplit as a library, you'll also need the header file and .so symlink:
+
+    sudo cp stlsplit.h /usr/local/include
+    sudo ln -s libstlsplit.so.1 /usr/local/lib/libstlsplit.so # or lib64
+    sudo ldconfig
+
 Running the command line tool
 -----------------------------
 
