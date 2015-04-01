@@ -14,12 +14,10 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <iostream>
 #include <set>
 #include <queue>
 #include <deque>
-#include <sstream>
-#include <admesh/stl.h>
+#include "stlsplit.h"
 
 std::vector<stl_file*> stl_split(stl_file* stl_in) {
   // We need neighbors and filled holes
@@ -76,29 +74,3 @@ std::vector<stl_file*> stl_split(stl_file* stl_in) {
     parts.push_back(stl_out);
   }
 }
-
-int main(int argc, char **argv) {
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " file.stl" << std::endl;
-    return 1;
-  }
-  stl_file stl_in;
-  stl_open(&stl_in, argv[1]);
-  stl_exit_on_error(&stl_in);
-  
-  std::vector<stl_file*> parts = stl_split(&stl_in);
-  
-  unsigned int namecounter = 0;
-  
-  for (std::vector<stl_file*>::const_iterator part = parts.begin(); part != parts.end(); part++) {
-    std::stringstream ss;
-    ss << argv[1] << ".part" << ++namecounter << ".stl";
-    stl_write_binary(*part, ss.str().c_str(), "stlsplit");
-    stl_exit_on_error(*part);
-    stl_close(*part);
-    delete *part;
-  }
-  
-  stl_close(&stl_in);
-}
-

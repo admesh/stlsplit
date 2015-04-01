@@ -3,4 +3,4 @@
 stlsplit
 a.out
 *~
-.o
+*.o
