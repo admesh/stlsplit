@@ -1,5 +1,4 @@
-
-local action = _ACTION or ""
+#!lua
 
 solution "stlsplit"
 	location ( "." )
