@@ -4,3 +4,14 @@ stlsplit
 a.out
 *~
 *.o
+Makefile
+obj
+build
+*.make
+*.cbp
+*.project
+*.vcproj*
+*.vcxproj*
+*.xcodeproj
+*.sln
+*.workspace
