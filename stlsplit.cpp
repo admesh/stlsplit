@@ -54,13 +54,10 @@ std::vector<stl_file*> stl_split(stl_file* stl_in) {
     }
     
     stl_file *stl_out = new stl_file;
+    stl_initialize(stl_out);
     stl_out->stats.type = inmemory;
     stl_out->stats.number_of_facets = facets.size();
     stl_out->stats.original_num_facets = stl_out->stats.number_of_facets;
-    stl_out->v_indices = NULL;
-    stl_out->v_shared = NULL;
-    stl_out->neighbors_start = NULL;
-    stl_clear_error(stl_out);
     stl_allocate(stl_out);
     
     
