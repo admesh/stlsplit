@@ -37,4 +37,4 @@ solution "stlsplit"
 		linkoptions { "-Lbuild" }
 		files { "cli.cpp" }
 		targetname ("stlsplit")
-		links { "stlsplit", "admesh" }
+		links { "lib", "admesh" }
