@@ -20,6 +20,7 @@ solution "stlsplit"
 		kind "SharedLib"
 		files { "stlsplit.cpp", "*.h" }
 		targetname ("stlsplit")
+		links { "admesh" }
 		configuration { "linux" }
 			targetextension (".so.1")
 			linkoptions { "-Wl,-soname,libstlsplit.so.1" }
@@ -29,7 +30,6 @@ solution "stlsplit"
 			targetextension (".1.dylib")
 			postbuildcommands { "ln -sf libstlsplit.1.dylib build/libstlsplit.dylib" }
 			--cleancommands { "rm build/libstlsplit.dylib || :" }
-			links { "admesh" }
 
 	project "cli"
 		kind "ConsoleApp"
