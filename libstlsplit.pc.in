@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libstlsplit
+Description: Library for splitting stls
+Version: @VERSION@
+Libs: -L${libdir} -lstlsplit
+Libs.private:
+Cflags: -I${includedir}
