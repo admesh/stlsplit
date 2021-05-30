@@ -14,6 +14,12 @@ solution "stlsplit"
 		defines { "NDEBUG" }
 		flags { "Optimize", "ExtraWarnings"}    
 
+        project "static-lib"
+                language "C++"
+                kind "StaticLib"
+                files { "stlsplit.cpp", "*.h" }
+                targetname ("stlsplit")
+                links { "admesh" }
 
 	project "lib"
 		language "C++"
